@@ -32,4 +32,50 @@ body {
 		}
 	}
 
+	.voting-wrapper {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		.voting-card {
+			width: calc(100% - 50px);
+			height: 100%;
+			color: black;
+			text-align: center;
+			&.hide {
+				background: black;
+			}
+			&.vote {
+				background: white;
+			}
+		}
+	}
+
+	table {
+		tr {
+			&.not-ready {
+				color: red
+			}
+			&.ready {
+				color: green;
+			}
+
+			td {
+				&:last {
+					padding-right: 40px;
+				}
+			}
+		}
+	}
+	button {
+		&:disabled,
+		&[disabled] {
+			cursor: not-allowed;
+		}
+	}
+	.user-action-button {
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+
 }

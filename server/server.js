@@ -2,36 +2,47 @@ var app = require('express')();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 
-class Player {
-    constructor() {
-        this.name = '';
-        this.vote = null;
-    }
+// const users = new Map();
+const users = [];
+function Player(name, vote = null) {
+  this.name = name;
+  this.vote = vote;
 }
-
-const users = new Map();
-const votes = new Map();
 
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
 
-io.on('connection', function(socket){
-  console.log('a user connected: ', socket.id);
+io.on('connection', function(socket) {
+  let _userName;
+  console.log('a socket connected: ', socket.id);
   const index = users.size + 1;
-  users.set(socket.id, { name: '', vote: null });
   socket.on('joined', (user) => {
-    console.log(`User Joined: [${user}]`);
-    let u = users.get(socket.id);
-    u.name = user;    
-    users.set(socket.id, u);
-    console.log(users);
+    console.log(`A new user Joined: [${user}]`);
+    _userName = user;
+    users.push(new Player(user));
     io.emit('users', users);
   });
-  socket.on('vote', (msg) => {
-    console.log(`Someone Voted: [${msg}]`);
-    
-    io.emit('voted', users);
+  socket.on('voted', (data) => {
+    users.forEach((user) => {
+      if (user.name === data.name) {
+        user.vote = data.vote;
+      }
+    });
+    io.emit('users', users);
+  });
+  socket.on('clear', (user) => {
+    users.forEach(u => u.vote = null);
+    io.emit('users', users);
+  });
+  socket.on('disconnect', () => {
+    const index = users.findIndex((e) => e.name === _userName);
+    if (index > -1) {
+      users.splice(index, 1);
+    } else {
+      console.log('disconnect without a user');
+    }
+    io.emit('users', users);
   });
 });
 
