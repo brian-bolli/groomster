@@ -1,0 +1,35 @@
+body {
+	padding: 0;
+
+	.pointing-container {
+		margin: 0 30%;
+		.estimate-buttons {
+			margin: 5px;
+			width: 100px;
+			height: 100px;
+			line-height: 88px;
+		}
+		.card {
+			margin: 20px 0;
+		}
+	}
+
+	.pointer-wrapper {
+		&.show {
+			display: block;
+		}
+		&.hidden {
+			display: none;
+		}
+	}
+
+	.disabled-overlay {
+		&.enabled {
+			background: white;
+		}
+		&.disabled {
+			background: grey;
+		}
+	}
+
+}
