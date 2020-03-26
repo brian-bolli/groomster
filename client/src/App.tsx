@@ -18,14 +18,9 @@ export class App extends React.Component<AppProps, AppState> {
 	render(): JSX.Element {
 		return (
 			<div className="App">
+				<div id="pagegradient"></div>
 				<Navigation />
-				<div className="container">
-					<div className="pointing-container">
-					<h1>Pointer Session: 123</h1>
-
-					<PointingSession />
-				</div>
-				</div>
+				<PointingSession />
 			</div>
 		);
 	}

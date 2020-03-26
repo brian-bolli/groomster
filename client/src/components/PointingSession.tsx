@@ -75,33 +75,56 @@ export default class PointingSession extends React.Component<
 		}
 	}
 
+	renderJoinSession(): JSX.Element {
+		if (!this.state.userName) {
+			return (
+				<div className="col-md-12 my-2">
+					<JoinSession onJoin={this.joinActiveSession} />
+				</div>
+			);
+		}
+	}
+
 	render(): JSX.Element {
 		return (
-			<div className="component">
-				<JoinSession onJoin={this.joinActiveSession} />
-				<div
-					className={
-						"disabled-overlay " + this.state.inSession
-							? "enabled"
-							: "disabled"
-					}
-				>
-					<VotingDashboard
-						totalPlayers={this.state.players.length}
-						totalVoted={this.state.voted}
-						onClearAction={this.clearCurrentVotes}
-						onShowAction={this.showResults}
-					/>
-					<VotingOptions
-						onVoteSelected={this.estimateSelected}
-						options={["1", "3", "5", "8", "13", "20", "40", "100", "?"]}
-					/>
-					<VotingResults
-						user={this.state.userName}
-						players={this.state.players}
-						show={this.state.show}
-						onClearVote={this.estimateSelected}
-					/>
+			<div className="container p-2">
+				<div className="row">
+					{/* <div className="col-md-12 my-2">
+						<JoinSession onJoin={this.joinActiveSession} />
+					</div> */}
+					{this.renderJoinSession()}
+					<div className="col-md-12 my-2">
+						<VotingDashboard
+							totalPlayers={this.state.players.length}
+							totalVoted={this.state.voted}
+							onClearAction={this.clearCurrentVotes}
+							onShowAction={this.showResults}
+						/>
+					</div>
+					<div className="col-md-6 col-sm-12 my-2">
+						<VotingOptions
+							onVoteSelected={this.estimateSelected}
+							options={[
+								"1",
+								"3",
+								"5",
+								"8",
+								"13",
+								"20",
+								"40",
+								"100",
+								"?"
+							]}
+						/>
+					</div>
+					<div className="col-md-6 col-sm-12 my-2">
+						<VotingResults
+							user={this.state.userName}
+							players={this.state.players}
+							show={this.state.show}
+							onClearVote={this.estimateSelected}
+						/>
+					</div>
 				</div>
 			</div>
 		);

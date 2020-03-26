@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from "reactstrap";
+import { Navbar, NavbarBrand, Nav, NavItem } from "reactstrap";
 
 class NavigationProps {}
 
@@ -16,10 +16,9 @@ export default class Navigation extends React.Component<
 	render(): JSX.Element {
 		return (
 			<Navbar dark color="dark" expand="md">
-				<NavbarBrand href="/">Pointer</NavbarBrand>
+				<NavbarBrand href="/">Groomster</NavbarBrand>
 				<Nav className="mr-auto" navbar>
 					<NavItem>
-						<NavLink href="/components/">Components</NavLink>
 					</NavItem>
 				</Nav>
 			</Navbar>

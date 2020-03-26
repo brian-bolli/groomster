@@ -51,7 +51,7 @@ export default class VotingResults extends React.Component<
 					<Table>
 						<thead>
 							<tr>
-								<th>Status</th>
+								<th></th>
 								<th>Name</th>
 								<th>Points</th>
 							</tr>
