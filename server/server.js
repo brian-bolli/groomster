@@ -1,7 +1,7 @@
-var app = require('express')();
+var express = require('express');
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
-
+var app = express();
 // const users = new Map();
 const users = [];
 function Player(name, vote = null) {
@@ -10,7 +10,7 @@ function Player(name, vote = null) {
 }
 
 app.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html');
+  res.sendFile(__dirname + './index.html');
 });
 
 io.on('connection', function(socket) {
