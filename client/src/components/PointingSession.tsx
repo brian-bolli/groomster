@@ -18,6 +18,7 @@ class PointingSessionProps {}
 class PointingSessionState {
 	inSession: boolean;
 	userName: string;
+	userVote: string;
 	players: User[];
 	show: boolean;
 	voted: number;
@@ -49,7 +50,14 @@ export default class PointingSession extends React.Component<
 		});
 		socket.emit("joined", userName);
 		socket.on("users", (users: User[]) => {
+			let userVote;
+			users.forEach((u: User) => {
+				if (u.name = this.state.userName) {
+					userVote = u.vote;
+				}
+			});
 			this.setState({
+				["userVote"]: userVote,
 				["players"]: users,
 				["voted"]: users.filter(e => e.vote).length
 			});
@@ -103,6 +111,7 @@ export default class PointingSession extends React.Component<
 					</div>
 					<div className="col-md-6 col-sm-12 my-2">
 						<VotingOptions
+							activeSelection={this.state.userVote}
 							onVoteSelected={this.estimateSelected}
 							options={[
 								"1",

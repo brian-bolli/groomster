@@ -1,0 +1,31 @@
+
+.voting-option {
+	padding: 0;
+	display: inline-block;
+	position: relative;
+	outline: none;
+	font-weight: bold;
+	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	text-align: center;
+	color: white;
+	background-color: #5a6268;
+	width: 90px;
+	font-size: 1.5em;
+	height: 60px;
+	line-height: 60px;
+	border: 3px #5a6268 solid;
+
+	&:focus,
+	&:hover {
+		border-color: red;
+		color: white;
+		text-decoration: none;
+		cursor: pointer;
+	}
+	&.active {
+		color: white;
+		background-color: green;
+		border-color: green;
+	}
+  }
+

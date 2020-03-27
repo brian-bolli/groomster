@@ -13,10 +13,11 @@ export class VotingOption {
 class VotingOptionsProps {
 	onVoteSelected: Function;
 	options: string[];
+	activeSelection: string;
 }
 
 class VotingOptionsState {
-	activeSelection: string;
+
 }
 
 export default class VotingOptions extends React.Component<
@@ -30,25 +31,22 @@ export default class VotingOptions extends React.Component<
 
 	render(): JSX.Element {
 		return (
-			<Card>
-				<CardBody>
-					<div className="row align-items-center">
-						{this.props.options.map((option, index) => (
-							<div className="col-4" key={index}>
-								<Button
-									className="estimate-buttons align-self-center"
-									onClick={() => this.props.onVoteSelected((isNaN(parseInt(option))) ? option : parseInt(option))}
-									active={
-										this.state.activeSelection === option
-									}
-								>
-									{option}
-								</Button>
-							</div>
-						))}
+			<div className="row align-items-center mt-3">
+				{this.props.options.map((option, index) => (
+					<div className="col-4" key={index}>
+						<button
+							className={`voting-option mb-3 ${
+								this.props.activeSelection === option
+									? "active"
+									: ""
+							}`}
+							onClick={() => this.props.onVoteSelected(isNaN(parseInt(option)) ? option : parseInt(option).toString())}
+						>
+							{option}
+						</button>
 					</div>
-				</CardBody>
-			</Card>
+				))}
+			</div>
 		);
 	}
 }
