@@ -1,7 +1,11 @@
 var express = require('express');
+var app = express();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
-var app = express();
+var path = require('path');
+
+const staticDirectory = path.resolve(__dirname, '../client/dist/');
+console.log('static directory -> ', staticDirectory);
 // const users = new Map();
 const users = [];
 function Player(name, vote = null) {
@@ -9,8 +13,16 @@ function Player(name, vote = null) {
   this.vote = vote;
 }
 
+// app.use(express.static(staticDirectory));
+
 app.get('/', function(req, res){
-  res.sendFile(__dirname + './index.html');
+  console.log('/ route hit');
+  res.sendFile(`${staticDirectory}/index.html`);
+});
+
+app.get('/bundle.js', function(req, res){
+  console.log('/bundle.js route hit');
+  res.sendFile(`${staticDirectory}/bundle.js`);
 });
 
 io.on('connection', function(socket) {

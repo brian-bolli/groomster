@@ -111,6 +111,7 @@ export default class PointingSession extends React.Component<
 					</div>
 					<div className="col-md-6 col-sm-12 my-2">
 						<VotingOptions
+							user={this.state.userName}
 							activeSelection={this.state.userVote}
 							onVoteSelected={this.estimateSelected}
 							options={[

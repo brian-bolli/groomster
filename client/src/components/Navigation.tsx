@@ -1,5 +1,13 @@
 import * as React from "react";
-import { Navbar, NavbarBrand, Nav, NavItem } from "reactstrap";
+import {
+	Navbar,
+	NavbarBrand,
+	Nav,
+	NavItem,
+	UncontrolledDropdown,
+	DropdownToggle,
+	DropdownMenu
+} from "reactstrap";
 
 class NavigationProps {}
 
@@ -19,6 +27,12 @@ export default class Navigation extends React.Component<
 				<NavbarBrand href="/">Groomster</NavbarBrand>
 				<Nav className="mr-auto" navbar>
 					<NavItem>
+						{/* <UncontrolledDropdown nav inNavbar>
+							<DropdownToggle nav caret>
+								Options
+							</DropdownToggle>
+							<DropdownMenu right></DropdownMenu>
+						</UncontrolledDropdown> */}
 					</NavItem>
 				</Nav>
 			</Navbar>
