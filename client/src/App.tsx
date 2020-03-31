@@ -18,7 +18,6 @@ export class App extends React.Component<AppProps, AppState> {
 	render(): JSX.Element {
 		return (
 			<div className="App">
-				<div id="pagegradient"></div>
 				<Navigation />
 				<PointingSession />
 			</div>
