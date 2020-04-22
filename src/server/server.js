@@ -4,7 +4,7 @@ var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 var path = require('path');
 
-const staticDirectory = path.resolve(__dirname, '../client/dist/');
+const staticDirectory = path.resolve(__dirname, '../../dist/');
 console.log('static directory -> ', staticDirectory);
 // const users = new Map();
 const users = [];
@@ -17,12 +17,12 @@ function Player(name, vote = null) {
 
 app.get('/', function(req, res){
   console.log('/ route hit');
-  res.sendFile(`${staticDirectory}/index.html`);
+  res.sendFile(`${staticDirectory}\\index.html`);
 });
 
 app.get('/bundle.js', function(req, res){
   console.log('/bundle.js route hit');
-  res.sendFile(`${staticDirectory}/bundle.js`);
+  res.sendFile(`${staticDirectory}\\bundle.js`);
 });
 
 io.on('connection', function(socket) {
@@ -32,7 +32,8 @@ io.on('connection', function(socket) {
   socket.on('joined', (user) => {
     console.log(`A new user Joined: [${user}]`);
     _userName = user;
-    users.push(new Player(user));
+	users.push(new Player(user));
+	console.log(users);
     io.emit('users', users);
   });
   socket.on('voted', (data) => {
@@ -58,6 +59,8 @@ io.on('connection', function(socket) {
   });
 });
 
-http.listen(3030, function(){
-  console.log('listening on *:3030');
+http.listen(3000, function(){
+  console.log('listening on *:3000');
 });
+
+

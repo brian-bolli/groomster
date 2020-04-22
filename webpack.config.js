@@ -3,7 +3,7 @@ const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: "./src/index.tsx",
+  entry: "./src/client/index.tsx",
   mode: "development",
   module: {
     rules: [
@@ -45,19 +45,13 @@ module.exports = {
   resolve: { extensions: [".ts", ".tsx", ".js", ".jsx"] },
   output: {
     path: path.resolve(__dirname, "dist/"),
-    publicPath: "/dist/",
+    publicPath: "/",
     filename: "bundle.js"
-  },
-  devServer: {
-    contentBase: path.join(__dirname, "public/"),
-    port: 3000,
-    publicPath: "http://localhost:3000/dist/",
-    hotOnly: true
   },
   plugins: [
 	  new webpack.HotModuleReplacementPlugin(),
 	  new HtmlWebpackPlugin({
-		  template: './public/index.html',
+		  template: './src/client/public/index.html',
 		  filename: './index.html'
 	  })
 	]
