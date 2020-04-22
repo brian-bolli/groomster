@@ -37,7 +37,7 @@ export default class PointingSession extends React.Component<
 	constructor(props: PointingSessionProps) {
 		super(props);
 		this.state = new PointingSessionState();
-		socket = io("http://localhost:3030");
+		socket = io("http://localhost:3000");
 		this.joinActiveSession = this.joinActiveSession.bind(this);
 		this.estimateSelected = this.estimateSelected.bind(this);
 		this.showResults = this.showResults.bind(this);
@@ -46,13 +46,13 @@ export default class PointingSession extends React.Component<
 
 	joinActiveSession(userName: string): void {
 		this.setState({
-			userName
+			['userName']: userName
 		});
 		socket.emit("joined", userName);
 		socket.on("users", (users: User[]) => {
 			let userVote;
 			users.forEach((u: User) => {
-				if (u.name = this.state.userName) {
+				if (u.name === this.state.userName) {
 					userVote = u.vote;
 				}
 			});
