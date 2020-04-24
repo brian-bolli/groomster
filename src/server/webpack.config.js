@@ -21,6 +21,10 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: ['.ts', '.js'],
+		extensions: ['.ts', '.js'],
+		alias: {
+			Enums$: path.resolve(__dirname, '../shared/enums/index.ts'),
+			Models$: path.resolve(__dirname, '../shared/models/index.ts')
+		}
     }
 }
