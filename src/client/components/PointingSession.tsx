@@ -5,8 +5,9 @@ import JoinSession from "./JoinSession";
 import VotingDashboard from "./VotingDashboard";
 import VotingResults from "./VotingResults";
 import VotingOptions from "./VotingOptions";
+import { SocketMessage } from "../../shared/enums";
 
-let socket: any;
+let socket: SocketIOClient.Socket;
 
 export class User {
 	name: string;
@@ -21,12 +22,14 @@ class PointingSessionState {
 	userVote: string;
 	players: User[];
 	show: boolean;
+	alerts: string[];
 	voted: number;
 	constructor() {
 		this.inSession = true;
 		this.players = [];
 		this.voted = 0;
 		this.show = false;
+		this.alerts = [];
 	}
 }
 
@@ -48,8 +51,21 @@ export default class PointingSession extends React.Component<
 		this.setState({
 			['userName']: userName
 		});
-		socket.emit("joined", userName);
-		socket.on("users", (users: User[]) => {
+		// socket.on(SocketMessage.ISVALID, (errors: string[]) => {
+		// 	console.log('is valid -> ', errors);
+		// 	if (errors.length === 0) {
+		// 		this.setState({
+		// 			['userName']: userName
+		// 		});
+
+		// 	} else {
+		// 		this.setState({
+		// 			['alerts']: errors
+		// 		})
+		// 	}
+		// });
+		socket.emit(SocketMessage.JOINED, userName);
+		socket.on(SocketMessage.USERS, (users: User[]) => {
 			let userVote;
 			users.forEach((u: User) => {
 				if (u.name === this.state.userName) {
@@ -62,6 +78,7 @@ export default class PointingSession extends React.Component<
 				["voted"]: users.filter(e => e.vote).length
 			});
 		});
+		socket.emit('validate', userName);
 	}
 
 	showResults(): void {
@@ -74,7 +91,7 @@ export default class PointingSession extends React.Component<
 		this.setState({
 			["show"]: false
 		});
-		socket.emit("clear", this.state.userName);
+		socket.emit(SocketMessage.CLEAR, this.state.userName);
 	}
 
 	estimateSelected(vote: number | null) {

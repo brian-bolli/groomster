@@ -5,15 +5,17 @@ import { Application } from 'express';
 import { createServer } from 'http';
 
 import { initializeSocketServer } from './SocketServer';
-import { serveHtml, serveBundleJavaScript } from './RouteHandler';
+import * as RouteHandler from './RouteHandler';
 
 const app: Application = express();
 const server = createServer(app);
 const io: IO.Server = IO(server, { serveClient: false });
 
 // Configure roads to load index.html and bundle.js
-app.get('/', serveHtml);
-app.get('/bundle.js', serveBundleJavaScript);
+app.get(RouteHandler.serveFaviconRoute, RouteHandler.serveFavicon);
+app.get(RouteHandler.serveHtmlRoute, RouteHandler.serveHtml);
+app.get(RouteHandler.serveJsRoute, RouteHandler.serveJs);
+app.get(RouteHandler.isNameAvailPath, RouteHandler.isNameAvail);
 
 // Initialize Socket Server
 initializeSocketServer(io);

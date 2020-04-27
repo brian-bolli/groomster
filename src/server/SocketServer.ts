@@ -9,10 +9,6 @@ export const initializeSocketServer = (io: Server): void => {
 		let _userName: string;
 		console.log('a socket connected: ', socket.id);
 
-		const onValidate = (userName: string) => {
-
-		}
-
 		const onJoined = (userName: string) => {
 			_userName = userName;
 			console.log(`A new user Joined: [${userName}]`);

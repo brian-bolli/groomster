@@ -1,3 +1,11 @@
 {
-	"presets": ["@babel/env", "@babel/preset-react", "@babel/typescript"]
+	"presets": ["@babel/env", "@babel/preset-react", "@babel/typescript"],
+	"plugins": [
+		["module-resolver", {
+		"alias": {
+			"@Enums": "./src/shared/enums",
+			"@Models": "./src/shared/models"
+		}
+	}]
+	]
 }

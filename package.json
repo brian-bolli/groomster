@@ -31,6 +31,7 @@
     "@types/socket.io-client": "^1.4.32",
     "autoprefixer": "^9.7.5",
     "babel-loader": "^8.1.0",
+    "babel-plugin-module-resolver": "^4.0.0",
     "concurrently": "^5.1.0",
     "css-loader": "^3.4.2",
     "html-webpack-plugin": "^4.0.3",

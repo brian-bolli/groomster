@@ -2,13 +2,14 @@ import { Player } from 'Models';
 
 const players: Player[] = [];
 
-export const playerNameExists = (name: string): boolean => {
+export const validateUniqueName = (name: string): boolean => {
+	let response: boolean = true;
 	players.forEach((player: Player) => {
 		if (player.name === name) {
-			return true;
+			response = false;
 		}
 	})
-	return false;
+	return response;
 }
 
 export const addPlayer = (userName: string): Player[] => {
