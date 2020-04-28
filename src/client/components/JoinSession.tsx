@@ -41,7 +41,7 @@ export default class JoinSession extends React.Component<
 	inputChanged(e: React.FormEvent<HTMLInputElement>): void {
 		const newValue = e.currentTarget.value;
 		if (newValue.length >= 3) {
-			fetch(`http://localhost:3000/name-check/${newValue}`)
+			fetch(`/name-check/${newValue}`)
 				.then(res => res.json())
 				.then((result: any) => {
 					console.log(result);

@@ -7,6 +7,7 @@ import { createServer } from 'http';
 import { initializeSocketServer } from './SocketServer';
 import * as RouteHandler from './RouteHandler';
 
+const PORT = process.env.PORT || 3000;
 const app: Application = express();
 const server = createServer(app);
 const io: IO.Server = IO(server, { serveClient: false });
@@ -21,8 +22,8 @@ app.get(RouteHandler.isNameAvailPath, RouteHandler.isNameAvail);
 initializeSocketServer(io);
 
 // Activate server
-server.listen(3000, function(){
-  console.log('listening on *:3000');
+server.listen(PORT, function(){
+  console.log(`listening on *:${PORT}`);
 });
 
 

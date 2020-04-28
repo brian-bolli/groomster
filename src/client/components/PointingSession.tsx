@@ -40,7 +40,7 @@ export default class PointingSession extends React.Component<
 	constructor(props: PointingSessionProps) {
 		super(props);
 		this.state = new PointingSessionState();
-		socket = io("http://localhost:3000");
+		socket = io();
 		this.joinActiveSession = this.joinActiveSession.bind(this);
 		this.estimateSelected = this.estimateSelected.bind(this);
 		this.showResults = this.showResults.bind(this);
