@@ -4,15 +4,15 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "build": "concurrently \"npm run build:client\" \"npm run build:server\"",
+    "build": "cross-env PORT=80 concurrently \"npm run build:client\" \"npm run build:server\"",
     "build:client": "webpack",
     "build:server": "webpack --config src/server/webpack.config.js",
-    "watch": "concurrently \"npm run watch:client\" \"npm run watch:server\"",
+    "watch": "cross-env PORT=3000 concurrently \"npm run watch:client\" \"npm run watch:server\"",
     "watch:client": "webpack -w",
     "watch:server": "webpack --config src/server/webpack.config.js -w",
-    "dev": "cross-env PORT=3000 concurrently npm:watch npm:start",
+    "dev": "concurrently npm:watch npm:start",
     "start": "nodemon main.js",
-    "serve": "cross-env PORT=80 concurrently npm:build npm:start",
+    "serve": "concurrently npm:build npm:start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Brian Bolli <brianbolli@gmail.com>",
@@ -38,7 +38,6 @@
     "less": "^3.11.1",
     "less-loader": "^5.0.0",
     "node-sass": "^4.13.1",
-    "nodemon": "^2.0.3",
     "postcss-loader": "^3.0.0",
     "precss": "^4.0.0",
     "sass-loader": "^8.0.2",
@@ -46,8 +45,7 @@
     "style-loader": "^1.1.3",
     "ts-loader": "^6.2.2",
     "typescript": "^3.8.3",
-    "webpack": "^4.42.1",
-    "webpack-cli": "^3.3.11"
+    "webpack": "^4.42.1"
   },
   "dependencies": {
     "@primer/octicons-react": "^9.6.0",
@@ -55,11 +53,13 @@
     "concurrently": "^5.2.0",
     "cross-env": "^7.0.2",
     "express": "^4.17.1",
+    "nodemon": "^2.0.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "reactstrap": "^8.4.1",
     "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.0",
-    "uws": "^10.148.1"
+    "uws": "^10.148.1",
+    "webpack-cli": "^3.3.11"
   }
 }
