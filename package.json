@@ -11,8 +11,8 @@
     "watch:client": "webpack -w",
     "watch:server": "webpack --config src/server/webpack.config.js -w",
     "dev": "cross-env PORT=3000 concurrently npm:watch npm:start",
-	"start": "nodemon main.js",
-	"serve": "cross-env PORT=80 concurrently npm:build npm:start",
+    "start": "nodemon main.js",
+    "serve": "cross-env PORT=80 concurrently npm:build npm:start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Brian Bolli <brianbolli@gmail.com>",
@@ -34,7 +34,6 @@
     "babel-loader": "^8.1.0",
     "babel-plugin-module-resolver": "^4.0.0",
     "concurrently": "^5.1.0",
-    "cross-env": "^7.0.2",
     "css-loader": "^3.4.2",
     "html-webpack-plugin": "^4.0.3",
     "less": "^3.11.1",
@@ -54,6 +53,7 @@
   "dependencies": {
     "@primer/octicons-react": "^9.6.0",
     "bootstrap": "^4.4.1",
+    "cross-env": "^7.0.2",
     "express": "^4.17.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
