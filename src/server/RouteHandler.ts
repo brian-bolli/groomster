@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Router, Request, Response } from "express";
 import { resolve } from "path";
 import * as PlayerService from "./PlayerService";
 
@@ -27,4 +27,8 @@ export const isNameAvail = (req: Request, res: Response) => {
 	const name: string = req.params.name;
 	const isValid: boolean = PlayerService.validateUniqueName(name);
 	res.json({ isValid });
+}
+
+export default (app: Express.Application) => {
+
 }
