@@ -14,7 +14,10 @@ export class User {
 	vote: number;
 }
 
-class PointingSessionProps {}
+class PointingSessionProps {
+	room: string;
+	name?: string;
+}
 
 class PointingSessionState {
 	inSession: boolean;
@@ -41,29 +44,24 @@ export default class PointingSession extends React.Component<
 		super(props);
 		this.state = new PointingSessionState();
 		socket = io();
+		socket.emit(SocketMessage.ROOM, this.props.room);
+		console.log('pointing session -> ', this.props.room);
 		this.joinActiveSession = this.joinActiveSession.bind(this);
 		this.estimateSelected = this.estimateSelected.bind(this);
 		this.showResults = this.showResults.bind(this);
 		this.clearCurrentVotes = this.clearCurrentVotes.bind(this);
 	}
 
+	componentDidMount() {
+		if (this.props.name) {
+			this.joinActiveSession(this.props.name);
+	   }
+	}
+
 	joinActiveSession(userName: string): void {
 		this.setState({
 			['userName']: userName
 		});
-		// socket.on(SocketMessage.ISVALID, (errors: string[]) => {
-		// 	console.log('is valid -> ', errors);
-		// 	if (errors.length === 0) {
-		// 		this.setState({
-		// 			['userName']: userName
-		// 		});
-
-		// 	} else {
-		// 		this.setState({
-		// 			['alerts']: errors
-		// 		})
-		// 	}
-		// });
 		socket.emit(SocketMessage.JOINED, userName);
 		socket.on(SocketMessage.USERS, (users: User[]) => {
 			let userVote;
@@ -78,7 +76,7 @@ export default class PointingSession extends React.Component<
 				["voted"]: users.filter(e => e.vote).length
 			});
 		});
-		socket.emit('validate', userName);
+		// socket.emit('validate', userName);
 	}
 
 	showResults(): void {

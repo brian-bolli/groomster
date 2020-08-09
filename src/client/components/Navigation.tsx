@@ -6,19 +6,42 @@ import {
 	NavItem,
 	UncontrolledDropdown,
 	DropdownToggle,
-	DropdownMenu
+	DropdownMenu,
+	NavLink,
+	DropdownItem
 } from "reactstrap";
 
-class NavigationProps {}
+class NavigationProps {
+	rooms: string[]
+}
 
-class NavigationState {}
+class NavigationState { }
 
 export default class Navigation extends React.Component<
 	NavigationProps,
 	NavigationState
-> {
+	> {
 	constructor(props: NavigationProps) {
 		super(props);
+	}
+
+	renderNoActiveSessions(): JSX.Element {
+		return (
+			<DropdownMenu>
+				<DropdownItem disabled>No Active Sessions</DropdownItem>
+			</DropdownMenu>
+		)
+	}
+
+	renderActiveSessions(): JSX.Element {
+		if (this.props.rooms.length === 0) {
+			return this.renderNoActiveSessions();
+		}
+		return (
+			<DropdownMenu>
+				{ this.props.rooms.map(room => <DropdownItem to={ `/${room}` }>{ room }</DropdownItem>)}
+			</DropdownMenu>
+		)
 	}
 
 	render(): JSX.Element {
@@ -27,12 +50,12 @@ export default class Navigation extends React.Component<
 				<NavbarBrand href="/">Groomster</NavbarBrand>
 				<Nav className="mr-auto" navbar>
 					<NavItem>
-						{/* <UncontrolledDropdown nav inNavbar>
+						<UncontrolledDropdown nav inNavbar>
 							<DropdownToggle nav caret>
-								Options
+								Join Session
 							</DropdownToggle>
-							<DropdownMenu right></DropdownMenu>
-						</UncontrolledDropdown> */}
+							{ this.renderActiveSessions() }
+						</UncontrolledDropdown>
 					</NavItem>
 				</Nav>
 			</Navbar>

@@ -1,6 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
 	entry: "./src/client/index.tsx",
@@ -12,7 +13,7 @@ module.exports = {
 				exclude: /node_modules/,
 				exclude: /(node_modules|bower_components)/,
 				loader: "babel-loader",
-				options: { presets: ["@babel/env"] },
+				options: { presets: ["@babel/env", "@babel/preset-react", "@babel/typescript"] },
 			},
 			{
 				test: /\.css|less$/,
@@ -45,7 +46,7 @@ module.exports = {
 						loader: "sass-loader", // compiles Sass to CSS
 					},
 				],
-			},
+			}
 		],
 	},
 	resolve: {
@@ -61,6 +62,7 @@ module.exports = {
 		filename: "bundle.js",
 	},
 	plugins: [
+		new CleanWebpackPlugin(),
 		new webpack.HotModuleReplacementPlugin(),
 		new HtmlWebpackPlugin({
 			template: "./src/client/public/index.html",

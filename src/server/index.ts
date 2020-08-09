@@ -6,6 +6,7 @@ import { createServer } from 'http';
 
 import { initializeSocketServer } from './SocketServer';
 import * as RouteHandler from './RouteHandler';
+import { Route } from 'react-router-dom';
 
 const PORT = process.env.PORT || 3000;
 const app: Application = express();
@@ -17,6 +18,7 @@ app.get(RouteHandler.serveFaviconRoute, RouteHandler.serveFavicon);
 app.get(RouteHandler.serveHtmlRoute, RouteHandler.serveHtml);
 app.get(RouteHandler.serveJsRoute, RouteHandler.serveJs);
 app.get(RouteHandler.isNameAvailPath, RouteHandler.isNameAvail);
+app.get(RouteHandler.isRoomNameAvailPath, RouteHandler.isRoomNameAvail);
 
 // Initialize Socket Server
 initializeSocketServer(io);

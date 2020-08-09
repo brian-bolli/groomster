@@ -6,6 +6,7 @@
         "module": "commonjs",
         "target": "es6",
 		"jsx": "react",
+		"lib": ["ES2018", "DOM"],
 		"allowSyntheticDefaultImports": true,
 		"baseUrl": ".",
 		"paths": {

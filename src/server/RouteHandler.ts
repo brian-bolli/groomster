@@ -1,6 +1,7 @@
 import { Router, Request, Response } from "express";
 import { resolve } from "path";
 import * as PlayerService from "./PlayerService";
+import * as RoomService from "./RoomService";
 
 const staticDirectory = resolve(process.cwd(), "dist");
 
@@ -29,6 +30,15 @@ export const isNameAvail = (req: Request, res: Response) => {
 	res.json({ isValid });
 }
 
-export default (app: Express.Application) => {
+export const isRoomNameAvailPath = '/room-check/:name';
+export const isRoomNameAvail = (req: Request, res: Response) => {
+	const name: string = req.params.name;
+	const isValid: boolean = RoomService.validateUniqueName(name);
+	res.json({ isValid });
+}
 
+export const getRoomsPath = '/rooms';
+export const getRooms = (req: Request, res: Response) => {
+	const rooms = RoomService.getRooms();
+	res.json({ rooms });
 }
