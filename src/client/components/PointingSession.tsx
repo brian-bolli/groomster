@@ -1,13 +1,11 @@
 import * as React from "react";
 import io from "socket.io-client";
+import * as SocketClient from "../SocketClient";
 
 import JoinSession from "./JoinSession";
 import VotingDashboard from "./VotingDashboard";
 import VotingResults from "./VotingResults";
 import VotingOptions from "./VotingOptions";
-import { SocketMessage } from "../../shared/enums";
-
-let socket: SocketIOClient.Socket;
 
 export class User {
 	name: string;
@@ -39,13 +37,12 @@ class PointingSessionState {
 export default class PointingSession extends React.Component<
 	PointingSessionProps,
 	PointingSessionState
-> {
+	> {
 	constructor(props: PointingSessionProps) {
 		super(props);
 		this.state = new PointingSessionState();
-		socket = io();
-		socket.emit(SocketMessage.ROOM, this.props.room);
 		console.log('pointing session -> ', this.props.room);
+		SocketClient.joinRoom(this.props.room);
 		this.joinActiveSession = this.joinActiveSession.bind(this);
 		this.estimateSelected = this.estimateSelected.bind(this);
 		this.showResults = this.showResults.bind(this);
@@ -55,15 +52,15 @@ export default class PointingSession extends React.Component<
 	componentDidMount() {
 		if (this.props.name) {
 			this.joinActiveSession(this.props.name);
-	   }
+		}
 	}
 
 	joinActiveSession(userName: string): void {
 		this.setState({
 			['userName']: userName
 		});
-		socket.emit(SocketMessage.JOINED, userName);
-		socket.on(SocketMessage.USERS, (users: User[]) => {
+		SocketClient.sendName(userName);
+		SocketClient.subscribeToUsersEvent((users: User[]) => {
 			let userVote;
 			users.forEach((u: User) => {
 				if (u.name === this.state.userName) {
@@ -76,26 +73,25 @@ export default class PointingSession extends React.Component<
 				["voted"]: users.filter(e => e.vote).length
 			});
 		});
-		// socket.emit('validate', userName);
+		SocketClient.subscribeToShowEvent(this.showResults);
 	}
 
 	showResults(): void {
 		this.setState({
 			["show"]: true
 		});
+		SocketClient.showVote();
 	}
 
 	clearCurrentVotes(): void {
 		this.setState({
 			["show"]: false
 		});
-		socket.emit(SocketMessage.CLEAR, this.state.userName);
+		SocketClient.clearVote(this.state.userName);
 	}
 
 	estimateSelected(vote: number | null) {
-		if (socket) {
-			socket.emit("voted", { name: this.state.userName, vote });
-		}
+		SocketClient.sendVote({ name: this.state.userName, vote });
 	}
 
 	renderJoinSession(): JSX.Element {
@@ -112,9 +108,6 @@ export default class PointingSession extends React.Component<
 		return (
 			<div className="container p-2">
 				<div className="row">
-					{/* <div className="col-md-12 my-2">
-						<JoinSession onJoin={this.joinActiveSession} />
-					</div> */}
 					{this.renderJoinSession()}
 					<div className="col-md-12 my-2">
 						<VotingDashboard

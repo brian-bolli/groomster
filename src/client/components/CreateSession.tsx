@@ -66,7 +66,7 @@ export default class CreateSession extends React.Component<CreateSessionProps, C
 
 	render(): JSX.Element {
 		if (this.state.formValid) {
-			return <Redirect to={`/${this.state.sessionName}/${this.state.userName}`} />
+			return <Redirect to={`/session?room=${this.state.sessionName}&name=${this.state.userName}`} />
 		}
 		return (
 			<div className="container p-2">

@@ -21,34 +21,44 @@ export const subscribeToRoomsMenu = (cb: Function) => {
 	}
 }
 
-export const subscribeToJoined = (cb: Function) => {
+export const subscribeToUsersEvent = (cb: Function) => {
 	if (socket) {
-		socket.on(SocketMessage.USERS, (users: User[]) => {
-			cb(null, users);
-		});
+		socket.on(SocketMessage.USERS, cb);
 	}
 }
 
-export const joinRoom = (roomName: string, cb: Function) => {
+export const subscribeToShowEvent = (cb: Function) => {
+	if (socket) {
+		socket.on(SocketMessage.SHOW, cb);
+	}
+}
+
+export const joinRoom = (roomName: string) => {
 	if (socket) {
 		socket.emit(SocketMessage.ROOM, roomName);
 	}
 }
 
-export const sendName = (userName: string, cb: Function) => {
+export const sendName = (userName: string) => {
 	if (socket) {
 		socket.emit(SocketMessage.JOINED, userName);
 	}
 }
 
-export const sendVote = (name: string, vote: number | null) => {
+export const sendVote = (user: User) => {
 	if (socket) {
-		socket.emit(SocketMessage.VOTED, { name, vote });
+		socket.emit(SocketMessage.VOTED, user);
 	}
 }
 
-export const clearVote = (userName: string, cb: Function) => {
+export const clearVote = (userName: string) => {
 	if (socket) {
 		socket.emit(SocketMessage.CLEAR, userName);
+	}
+}
+
+export const showVote = () => {
+	if (socket) {
+		socket.emit(SocketMessage.SHOW);
 	}
 }

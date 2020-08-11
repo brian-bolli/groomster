@@ -7,6 +7,7 @@ export enum SocketMessage {
 	VOTED = 'voted',
 	USERS = 'users',
 	CLEAR = 'clear',
+	SHOW = 'show',
 	ERROR = 'error',
 	DISCONNECT ='disconnect'
 }
