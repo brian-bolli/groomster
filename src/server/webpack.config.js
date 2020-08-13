@@ -24,6 +24,7 @@ module.exports = {
 		extensions: ['.ts', '.js'],
 		alias: {
 			Enums$: path.resolve(__dirname, '../shared/enums/index.ts'),
+			Interfaces$: path.resolve(__dirname, '../shared/interfaces/index.ts'),
 			Models$: path.resolve(__dirname, '../shared/models/index.ts')
 		}
     }

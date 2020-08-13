@@ -13,12 +13,27 @@ module.exports = {
 				exclude: /node_modules/,
 				exclude: /(node_modules|bower_components)/,
 				loader: "babel-loader",
-				options: { presets: ["@babel/env", "@babel/preset-react", "@babel/typescript"] },
+				options: { presets: ["@babel/preset-env", "@babel/preset-react", "@babel/typescript"] },
 			},
 			{
 				test: /\.css|less$/,
-				exclude: /node_modules/,
-				use: ["style-loader", "css-loader", "less-loader"],
+				use: ['style-loader',
+					{
+						loader: 'css-loader',
+						options: {
+							sourceMap: true,
+						}
+					},
+					{
+						loader: 'less-loader',
+						options: {
+							sourceMap: true,
+							lessOptions: {
+								javascriptEnabled: true
+							 }
+						}
+					}
+				]
 			},
 			{
 				test: /\.scss$/,
@@ -50,7 +65,7 @@ module.exports = {
 		],
 	},
 	resolve: {
-		extensions: [".ts", ".tsx", ".js", ".jsx"],
+		extensions: [".ts", ".tsx", ".js", ".jsx", ".css", ".less"],
 		alias: {
 			Enums$: path.resolve(__dirname, "../shared/enums/index.ts"),
 			Models$: path.resolve(__dirname, "../shared/models/index.ts"),

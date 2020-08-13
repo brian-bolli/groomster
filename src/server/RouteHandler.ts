@@ -14,6 +14,7 @@ export const serveFavicon = (_req: Request, res: Response) => {
 export const serveHtmlRoute = '/';
 export const serveHtml = (_req: Request, res: Response) => {
 	console.log("/ route hit");
+	console.log(_req.session);
 	res.sendFile(`${staticDirectory}\\index.html`);
 };
 

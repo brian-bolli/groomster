@@ -2,12 +2,12 @@ import React from "react";
 import Navigation from "./components/Navigation";
 import CreateSession from "./components/CreateSession";
 import PointingSession from "./components/PointingSession";
-
+import { Switch, Route, BrowserRouter as Router, useLocation } from "react-router-dom";
 import * as SocketClient from "./SocketClient";
 
 import "./style/App.less";
 import "./style/bootstrap.scss";
-import { Switch, Route, BrowserRouter as Router, useLocation } from "react-router-dom";
+import JiraProjectFilterForm from "./components/jira/JiraProjectFilterForm";
 
 class AppProps { }
 
@@ -39,11 +39,14 @@ export class App extends React.Component<AppProps, AppState> {
 		return (
 			<Router>
 				<div className="App">
+					{/* <NavBar /> */}
 					<Navigation />
 					<Switch>
+						{ /* Login Route here */ }
 						<Route path="/session" children={<RenderPointingSession />} />
 						<Route path="/">
 							<CreateSession />
+							<JiraProjectFilterForm />
 						</Route>
 					</Switch>
 				</div>
