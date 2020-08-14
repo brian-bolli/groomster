@@ -1,6 +1,5 @@
 import fetch from "node-fetch";
 import { HttpMethods } from "Enums";
-import { METHODS } from "http";
 import { JqlIssueSearch } from "src/shared/models/jira/JqlIssueSearch";
 
 export class JiraRestRequest<T> {
@@ -9,7 +8,7 @@ export class JiraRestRequest<T> {
 	private _email: string;
 	private _token: string;
 	private _path: string
-	private _method: string;
+	private _method: HttpMethods;
 	private _body: JqlIssueSearch
 
 	constructor(method: HttpMethods, path: string, body?: JqlIssueSearch) {

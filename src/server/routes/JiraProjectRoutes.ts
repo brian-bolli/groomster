@@ -8,7 +8,7 @@ const jiraProjectRoutes = Router();
 jiraProjectRoutes.get('/jira/issues/search', async (req: Request, res: Response) => {
 	const jqlBody = new JqlIssueSearch("project in (HIAM, HIAD) and status in ('Open', 'In Progress')");
 	const restRequest = new JiraRestRequest<JqlIssueSearchResult>(HttpMethods.POST, 'search', jqlBody);
-	let issues = restRequest.makeRestRequest();
+	let issues = await restRequest.makeRestRequest();
 	res.json(issues)
 });
 
