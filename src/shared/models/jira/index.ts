@@ -4,3 +4,5 @@ export * from "./ProjectCategory";
 export * from "./AvatarUrl";
 export * from "./StatusCategory";
 export * from "./TicketStatus";
+export * from "./JqlIssueSearch";
+export * from "./JqlIssueSearchResult";

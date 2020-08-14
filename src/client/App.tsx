@@ -8,6 +8,7 @@ import * as SocketClient from "./SocketClient";
 import "./style/App.less";
 import "./style/bootstrap.scss";
 import JiraProjectFilterForm from "./components/jira/JiraProjectFilterForm";
+import CreateJiraSession from "./components/CreateJiraSession";
 
 class AppProps { }
 
@@ -44,9 +45,9 @@ export class App extends React.Component<AppProps, AppState> {
 					<Switch>
 						{ /* Login Route here */ }
 						<Route path="/session" children={<RenderPointingSession />} />
+						<Route path="/create/jira" children={<CreateJiraSession />} />
 						<Route path="/">
-							<CreateSession />
-							<JiraProjectFilterForm />
+							<CreateJiraSession />
 						</Route>
 					</Switch>
 				</div>

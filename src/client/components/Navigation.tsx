@@ -58,6 +58,43 @@ export default class Navigation extends React.Component<
 		)
 	}
 
+	renderUserLogin(): JSX.Element {
+		return (
+			<UncontrolledDropdown nav inNavbar>
+				<DropdownToggle nav caret>
+					Login
+				</DropdownToggle>
+				<DropdownMenu>
+					<DropdownItem>
+						<NavLink to="/auth/google">Google Auth</NavLink>
+					</DropdownItem>
+					<DropdownItem>
+						<NavLink to="/auth/github">Github Auth</NavLink>
+					</DropdownItem>
+				</DropdownMenu>
+			</UncontrolledDropdown>
+		);
+	}
+
+	renderUserControls(): JSX.Element {
+		// if (0 === true) {
+		// 	return this.renderUserLogin();
+		// }
+
+		return(
+			<UncontrolledDropdown nav inNavbar>
+				<DropdownToggle nav caret>
+					User
+				</DropdownToggle>
+				<DropdownMenu>
+					<DropdownItem>
+						<Link to="/create/jira">Jira Session</Link>
+					</DropdownItem>
+				</DropdownMenu>
+			</UncontrolledDropdown>
+		);
+	}
+
 	render(): JSX.Element {
 		return (
 			<Navbar dark color="dark" expand="md">
@@ -67,10 +104,13 @@ export default class Navigation extends React.Component<
 						<DropdownToggle nav caret>
 							Join Session
 							</DropdownToggle>
-						{this.renderActiveSessions()}
+						{ this.renderActiveSessions() }
 					</UncontrolledDropdown>
 				</Nav>
-			</Navbar>
+				<Nav className="ml-auto" navbar>
+					{ this.renderUserControls() }
+				</Nav>
+			</Navbar >
 		);
 	}
 }

@@ -1,6 +1,7 @@
 # Tests
 test.js
 project*.json
+issue*.json
 
 # Logs
 logs

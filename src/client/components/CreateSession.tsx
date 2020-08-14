@@ -23,7 +23,7 @@ export default class CreateSession extends React.Component<CreateSessionProps, C
 	constructor(props: CreateSessionProps) {
 		super(props);
 		this.state = new CreateSessionState();
-
+		console.log(document.cookie);
 		this.createSession = this.createSession.bind(this);
 		this.sessionInputChanged = this.sessionInputChanged.bind(this);
 		this.nameInputChanged = this.nameInputChanged.bind(this);
