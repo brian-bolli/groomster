@@ -77,7 +77,7 @@
     "reactstrap": "^8.4.1",
     "rsuite": "^4.8.0",
     "session-file-store": "^1.4.0",
-    "socket.io": "^2.3.0",
+    "socket.io": "^2.5.0",
     "socket.io-client": "^2.3.0",
     "uws": "^10.148.1",
     "webpack": "^4.43.0",
